@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "prettier": "prettier --write . --ext .ts,.tsx",
+    "prettier": "npx prettier --write . --ext .ts,.tsx",
     "eslint": "eslint --fix . --ext .ts,.tsx",
     "fix": "npm run prettier && npm run eslint"
   },
@@ -16,7 +16,8 @@
     "primeicons": "^7.0.0",
     "primereact": "^10.6.6",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "zustand": "^4.5.2"
   },
   "devDependencies": {
     "@types/node": "^20",
