@@ -12,6 +12,7 @@
     "fix": "npm run prettier && npm run eslint"
   },
   "dependencies": {
+    "dayjs": "^1.11.11",
     "next": "14.2.3",
     "primeicons": "^7.0.0",
     "primereact": "^10.6.6",

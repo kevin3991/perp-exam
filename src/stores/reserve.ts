@@ -1,15 +1,17 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
+import { type IPersistStore } from '.';
+
 export type TCurrency = 'TWD' | 'USD' | 'EUR';
-export interface TReserveItem {
+export interface IReserveItem {
   label: string;
   currency: TCurrency;
   amount: number;
 }
 
 export interface IReserveState {
-  items: TReserveItem[];
+  items: IReserveItem[];
 }
 
 export interface IReserveActions {
@@ -41,10 +43,6 @@ const reserveSlice = (set: any): IReserveStore => ({
   },
 });
 
-interface IPersistStore {
-  persistLoading: boolean;
-  setPersistLoading: (loading: boolean) => void;
-}
 export const useReserveStore = create<IReserveStore & IPersistStore>()(
   persist(
     (set, get) => ({

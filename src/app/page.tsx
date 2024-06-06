@@ -1,5 +1,6 @@
 'use client';
 
+import LogTable from '@/components/LogTable';
 import { useExchange } from '@/hooks/useExchange';
 import { type TCurrency } from '@/stores/reserve';
 import { Button } from 'primereact/button';
@@ -8,8 +9,14 @@ import { InputText } from 'primereact/inputtext';
 import { useState } from 'react';
 
 export default function Home(): JSX.Element {
-  const { items, exchangeOptions, getFromAndTo, exchange, persistLoading } =
-    useExchange();
+  const {
+    items,
+    exchangeOptions,
+    getFromAndTo,
+    exchange,
+    persistLoading,
+    reset,
+  } = useExchange();
 
   const [value, setValue] = useState(0);
   const [exchangeTo, setExchangeTo] = useState<string>('');
@@ -36,6 +43,7 @@ export default function Home(): JSX.Element {
             {item.label}：{item.amount}
           </p>
         ))}
+        <Button severity="danger" label="Reset" onClick={reset}></Button>
         <form onSubmit={handleExchange}>
           <label>換成</label>
           <Dropdown
@@ -53,6 +61,8 @@ export default function Home(): JSX.Element {
           />
           <Button label="Click" />
         </form>
+
+        <LogTable />
       </div>
     </div>
   );

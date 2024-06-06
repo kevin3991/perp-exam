@@ -1,13 +1,18 @@
 import {
-  type TReserveItem,
-  useReserveStore,
+  type IReserveItem,
   type TCurrency,
+  useReserveStore,
 } from '@/stores/reserve';
-import { exchangeCurrency, type IExchangeResult } from '@/utils/common';
+import { useReserveLogStore } from '@/stores/reserveLog';
+import {
+  exchangeCurrency,
+  getUuid,
+  type IExchangeResult,
+} from '@/utils/common';
 import { useCallback, useMemo } from 'react';
 
 interface IUseExchange {
-  items: TReserveItem[];
+  items: IReserveItem[];
   exchangeOptions: Array<{ label: string; value: string }>;
   getFromAndTo: (exchangeTo: string) => TCurrency[];
   exchange: (
@@ -16,10 +21,17 @@ interface IUseExchange {
     amount: number
   ) => IExchangeResult | undefined;
   persistLoading: boolean;
+  reset: () => void;
 }
 
 export const useExchange = (): IUseExchange => {
-  const { items, updateAmount, persistLoading } = useReserveStore();
+  const {
+    items,
+    updateAmount,
+    persistLoading,
+    reset: resetReserve,
+  } = useReserveStore();
+  const { addLog, reset: resetReserveLog } = useReserveLogStore();
 
   const exchangeOptions = useMemo(() => {
     return items.flatMap((item, index, arr) => {
@@ -45,15 +57,31 @@ export const useExchange = (): IUseExchange => {
       }
 
       const result = exchangeCurrency(fromItem.amount, toItem.amount, amount);
-      const { newReserves } = result;
+      const { exchanged, newReserves } = result;
 
       updateAmount(from, newReserves.from);
       updateAmount(to, newReserves.to);
 
+      addLog({
+        id: getUuid(),
+        from,
+        fromAmount: amount,
+        currentFromAmount: newReserves.from,
+        to,
+        toAmount: exchanged,
+        currentToAmount: newReserves.to,
+        status: 'success',
+        createdAt: new Date().toISOString(),
+      });
+
       return result;
     },
-    [items, updateAmount]
+    [items, updateAmount, addLog]
   );
+  const reset = useCallback(() => {
+    resetReserve();
+    resetReserveLog();
+  }, [resetReserve, resetReserveLog]);
 
   return {
     items,
@@ -61,5 +89,6 @@ export const useExchange = (): IUseExchange => {
     getFromAndTo,
     exchange,
     persistLoading,
+    reset,
   };
 };
