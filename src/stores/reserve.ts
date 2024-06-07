@@ -23,9 +23,9 @@ export type IReserveStore = IReserveState & IReserveActions;
 
 export const defaultInitState: IReserveState = {
   items: [
-    { label: '台幣', currency: 'TWD', amount: 10000 },
-    { label: '美金', currency: 'USD', amount: 1000 },
-    // { label: '歐元', currency: 'EUR', amount: 500 },
+    { label: 'TWD', currency: 'TWD', amount: 10000 },
+    { label: 'USD', currency: 'USD', amount: 1000 },
+    // { label: 'EUR', currency: 'EUR', amount: 500 },
   ],
 };
 

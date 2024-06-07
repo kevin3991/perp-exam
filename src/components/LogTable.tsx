@@ -4,8 +4,15 @@ import CTable from './common/CTable';
 import dayjs from 'dayjs';
 import { formatNumberWithCommas } from '@/utils/common';
 import Info from './Info';
+import { Fieldset } from 'primereact/fieldset';
 
-const LogTable = (): JSX.Element => {
+interface ILogTableProps {
+  className?: string;
+}
+
+const LogTable = (props: ILogTableProps): JSX.Element => {
+  const { className } = props;
+
   const { logs } = useReserveLogStore();
 
   const columns = useMemo(() => {
@@ -64,7 +71,11 @@ const LogTable = (): JSX.Element => {
     ];
   }, []);
 
-  return <CTable data={logs} columns={columns} />;
+  return (
+    <Fieldset legend="History" className={className}>
+      <CTable data={logs} columns={columns} />
+    </Fieldset>
+  );
 };
 
 const Price = (props: { price: number; currency: string }): JSX.Element => {

@@ -1,67 +1,39 @@
 'use client';
 
+import ExchangeForm from '@/components/ExchangeForm';
 import LogTable from '@/components/LogTable';
 import { useExchange } from '@/hooks/useExchange';
-import { type TCurrency } from '@/stores/reserve';
+import { formatNumberWithCommas } from '@/utils/common';
 import { Button } from 'primereact/button';
-import { Dropdown } from 'primereact/dropdown';
-import { InputText } from 'primereact/inputtext';
-import { useState } from 'react';
+import { Fieldset } from 'primereact/fieldset';
 
 export default function Home(): JSX.Element {
-  const {
-    items,
-    exchangeOptions,
-    getFromAndTo,
-    exchange,
-    persistLoading,
-    reset,
-  } = useExchange();
-
-  const [value, setValue] = useState(0);
-  const [exchangeTo, setExchangeTo] = useState<string>('');
-
-  const handleExchange = (e: any): void => {
-    e.preventDefault();
-    console.log('handleExchange', value, exchangeTo);
-    const [from, to] = getFromAndTo(exchangeTo);
-    // console.log('from, to', from, to);
-    const result = exchange(from, to, value);
-    console.log('result', result);
-  };
+  const { items, persistLoading, reset } = useExchange();
 
   if (persistLoading) {
     return <div className="flex justify-center pt-[200px]">Loading...</div>;
   }
 
   return (
-    <div className="flex justify-center pt-[200px]">
-      <div>
-        <h1>Exchange</h1>
-        {items.map((item) => (
-          <p key={item.currency}>
-            {item.label}：{item.amount}
-          </p>
-        ))}
-        <Button severity="danger" label="Reset" onClick={reset}></Button>
-        <form onSubmit={handleExchange}>
-          <label>換成</label>
-          <Dropdown
-            value={exchangeTo}
-            options={exchangeOptions}
-            onChange={(e) => {
-              setExchangeTo(e.value as TCurrency);
-            }}
+    <div className="flex justify-center pt-[200px] pb-[60px]">
+      <div className="max-w-[600px] w-[80vw] gap-4 flex flex-col">
+        <div className="flex justify-between items-center mb-2">
+          <h1 className="text-[32px] font-bold">Exchange module</h1>
+          <Button
+            severity="danger"
+            label="Reset"
+            size="small"
+            onClick={reset}
           />
-          <label>輸入金額</label>
-          <InputText
-            onChange={(e) => {
-              setValue(Number(e.target.value));
-            }}
-          />
-          <Button label="Click" />
-        </form>
-
+        </div>
+        <Fieldset legend="Reserves">
+          {items.map((item) => (
+            <p key={item.currency}>
+              {item.label}：{formatNumberWithCommas(Number(item.amount))}
+            </p>
+          ))}
+        </Fieldset>
+        <ExchangeForm />
         <LogTable />
       </div>
     </div>

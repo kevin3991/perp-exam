@@ -10,13 +10,15 @@ interface IInfoProps {
 
 const Info = (props: IInfoProps): JSX.Element => {
   const uuid = useRef(getUuid());
+  const iconRef = useRef<HTMLSpanElement>(null);
+
   return (
     <span>
       <i
-        id={uuid.current}
-        className="pi pi-info-circle ml-2 cursor-pointer text-[var(--primary-color)]"
+        ref={iconRef}
+        className={`pi pi-info-circle ml-2 cursor-pointer text-[var(--primary-color)] ${uuid.current}`}
       />
-      <Tooltip target={`#${uuid.current}`}>{props.children}</Tooltip>
+      <Tooltip target={iconRef}>{props.children}</Tooltip>
     </span>
   );
 };
