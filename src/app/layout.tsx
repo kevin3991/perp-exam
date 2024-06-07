@@ -11,7 +11,7 @@ import 'primeicons/primeicons.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'Perpetual Protocol Exam',
+  title: 'CFMM',
   description: 'The Exam is a test of Principle of Reserve Balance.',
 };
 
