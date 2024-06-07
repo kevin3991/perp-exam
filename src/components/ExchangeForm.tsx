@@ -6,6 +6,7 @@ import { type TCurrency } from '@/stores/reserve';
 import { Fieldset } from 'primereact/fieldset';
 import Info from './Info';
 import { useToast } from '@/hooks/useToast';
+import { confirmDialog } from 'primereact/confirmdialog';
 
 interface IExchangeFormProps {
   className?: string;
@@ -62,9 +63,18 @@ const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
     ];
   }, [exchangeOptions, currency]);
   const onSubmit = async (): Promise<void> => {
-    const [from, to] = getFromAndTo(form.exchangeTo as TCurrency);
-    exchange(from, to, Number(form.amount));
-    toastHook.show('Exchange success!');
+    confirmDialog({
+      message: `Do you want to exchange ${form.amount} ${form.exchangeTo}?`,
+      header: 'Exchange Confirmation',
+      icon: 'pi pi-info-circle',
+      defaultFocus: 'reject',
+      acceptClassName: 'p-button-primary',
+      accept: () => {
+        const [from, to] = getFromAndTo(form.exchangeTo as TCurrency);
+        exchange(from, to, Number(form.amount));
+        toastHook.show('Exchange success!');
+      },
+    });
   };
   const handleMode = useCallback(() => {
     if (form.exchangeTo === '') {

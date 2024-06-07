@@ -3,6 +3,7 @@
 import { Toast } from 'primereact/toast';
 import { useToastStore } from '@/stores/toast';
 import { useCallback } from 'react';
+import { ConfirmDialog } from 'primereact/confirmdialog';
 
 const ToastRoot = (): JSX.Element => {
   const toastStore = useToastStore();
@@ -15,7 +16,12 @@ const ToastRoot = (): JSX.Element => {
     [toastStore]
   );
 
-  return <Toast ref={toastRef} />;
+  return (
+    <>
+      <Toast ref={toastRef} />
+      <ConfirmDialog />
+    </>
+  );
 };
 
 export default ToastRoot;

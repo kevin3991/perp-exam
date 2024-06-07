@@ -15,7 +15,7 @@ export default function Home(): JSX.Element {
 
   return (
     <div className="flex justify-center py-[60px]">
-      <div className="max-w-[600px] w-[80vw] gap-4 flex flex-col">
+      <div className="max-w-[640px] w-[80vw] gap-4 flex flex-col">
         <div className="flex justify-between items-center mb-2">
           <h1 className="text-[32px] font-bold">Exchange module</h1>
           <Button
