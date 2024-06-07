@@ -15,7 +15,7 @@ This project implements an exchange module where users can exchange TWD (Taiwan 
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/sather33/perp-exam-roy
+   git clone git@github.com:sather33/perp-exam-roy.git
    ```
 
 2. Navigate to the project directory:
