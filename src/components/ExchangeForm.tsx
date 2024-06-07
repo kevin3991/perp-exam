@@ -7,6 +7,8 @@ import { Fieldset } from 'primereact/fieldset';
 import Info from './Info';
 import { useToast } from '@/hooks/useToast';
 import { confirmDialog } from 'primereact/confirmdialog';
+import { formatNumberWithCommas } from '@/utils/common';
+import { Message } from 'primereact/message';
 
 interface IExchangeFormProps {
   className?: string;
@@ -64,7 +66,17 @@ const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
   }, [exchangeOptions, currency]);
   const onSubmit = async (): Promise<void> => {
     confirmDialog({
-      message: `Do you want to exchange ${form.amount} ${form.exchangeTo}?`,
+      message: () => {
+        const text = `${formatNumberWithCommas(Number(form.amount))} ${
+          form.exchangeTo
+        }`;
+        return (
+          <div>
+            <p>Do you want to exchange?</p>
+            <Message severity="info" text={text} className="mt-2" />
+          </div>
+        );
+      },
       header: 'Exchange Confirmation',
       icon: 'pi pi-info-circle',
       defaultFocus: 'reject',

@@ -168,11 +168,12 @@ export default function CForm(props: FormProps): JSX.Element {
           );
         })}
       </div>
-      <div className="flex justify-end gap-4">
+      <div className="flex justify-end gap-4 mt-2">
         {onRemove !== undefined && (
           <Button
             type="button"
             severity="danger"
+            size="small"
             onClick={() => {
               onRemove();
             }}
@@ -184,6 +185,7 @@ export default function CForm(props: FormProps): JSX.Element {
           <Button
             type="button"
             severity="secondary"
+            size="small"
             onClick={() => {
               onCancel();
             }}
@@ -192,7 +194,7 @@ export default function CForm(props: FormProps): JSX.Element {
           </Button>
         )}
         {onSubmit !== undefined && (
-          <Button severity="success" loading={isLoading}>
+          <Button severity="success" loading={isLoading} size="small">
             {submitT}
           </Button>
         )}

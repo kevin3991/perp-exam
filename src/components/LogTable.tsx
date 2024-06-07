@@ -4,7 +4,7 @@ import CTable from './common/CTable';
 import dayjs from 'dayjs';
 import { formatNumberWithCommas } from '@/utils/common';
 import Info from './Info';
-import { Fieldset } from 'primereact/fieldset';
+import { Card } from 'primereact/card';
 
 interface ILogTableProps {
   className?: string;
@@ -72,9 +72,9 @@ const LogTable = (props: ILogTableProps): JSX.Element => {
   }, []);
 
   return (
-    <Fieldset legend="History" className={className}>
-      <CTable data={logs} columns={columns} />
-    </Fieldset>
+    <Card className={className} title="History">
+      <CTable stripedRows data={logs} columns={columns} />
+    </Card>
   );
 };
 

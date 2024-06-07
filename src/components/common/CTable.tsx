@@ -9,11 +9,19 @@ export interface ICTableColumn {
 interface ICTableProps {
   data: any[];
   columns: ICTableColumn[];
+  stripedRows?: boolean;
+  scrollable?: boolean;
 }
 
 const CTable = (props: ICTableProps): JSX.Element => {
+  const { stripedRows = false, scrollable = true } = props;
+
   return (
-    <DataTable value={props.data}>
+    <DataTable
+      value={props.data}
+      stripedRows={stripedRows}
+      scrollable={scrollable}
+    >
       {props.columns.map((column) => (
         <Column
           key={column.field}
