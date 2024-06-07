@@ -1,6 +1,7 @@
 # Exchange Module
 
 This project implements an exchange module where users can exchange TWD (Taiwan Dollar) and USD (United States Dollar) using a simple trading interface. The module maintains reserves for both currencies and updates them after each trade.
+Demo: https://cfmm.zeabur.app/
 
 ## Features
 
