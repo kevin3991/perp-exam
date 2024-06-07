@@ -1,8 +1,8 @@
 import { useMemo, useCallback, type FormEvent, useState } from 'react';
 import { InputText } from 'primereact/inputtext';
 import { Button } from 'primereact/button';
-import { InputNumber } from 'primereact/inputnumber';
 import CSelect from './CSelect';
+import CurrencyInput from 'react-currency-input-field';
 
 export interface TFormInput {
   name: string;
@@ -95,20 +95,17 @@ export default function CForm(props: FormProps): JSX.Element {
           );
         case 'Number':
           return (
-            <InputNumber
-              showButtons
+            <CurrencyInput
               value={form[input.name] as number}
+              decimalsLimit={2}
               placeholder={input.placeholder}
               disabled={input.disabled}
               required={input.required}
-              className="w-full p-inputtext-sm"
-              onValueChange={(e) => {
-                updateForm(input.name, e.value);
+              intlConfig={{ locale: 'en-US', currency: input.currency }}
+              className="p-inputnumber-input p-inputtext p-component w-full"
+              onValueChange={(value, name, values) => {
+                updateForm(input.name, value);
               }}
-              min={input.min}
-              currency={input.currency}
-              mode={input.currency !== undefined ? 'currency' : 'decimal'}
-              {...input.componentProps}
             />
           );
         default:
