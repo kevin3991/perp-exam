@@ -9,7 +9,9 @@
     "lint": "next lint",
     "prettier": "npx prettier --write . --ext .ts,.tsx",
     "eslint": "eslint --fix . --ext .ts,.tsx",
-    "fix": "npm run prettier && npm run eslint"
+    "fix": "npm run prettier && npm run eslint",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "dependencies": {
     "dayjs": "^1.11.11",
@@ -21,6 +23,9 @@
     "zustand": "^4.5.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.5",
+    "@testing-library/react": "^16.0.0",
+    "@types/jest": "^29.5.12",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
@@ -28,8 +33,11 @@
     "eslint-config-next": "14.2.3",
     "eslint-config-prettier": "^9.1.0",
     "eslint-config-standard-with-typescript": "^43.0.1",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
     "typescript": "^5"
   }
 }

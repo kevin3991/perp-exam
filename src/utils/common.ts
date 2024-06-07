@@ -7,6 +7,16 @@ export interface IExchangeResult {
 }
 
 function exchangeCurrency(Rt: number, Ru: number, x: number): IExchangeResult {
+  if (Rt === 0 || Ru === 0 || x === 0) {
+    return {
+      exchanged: 0,
+      newReserves: {
+        from: Rt + x,
+        to: Ru - x,
+      },
+    };
+  }
+
   const y = Ru - (Rt * Ru) / (Rt + x);
 
   return {
