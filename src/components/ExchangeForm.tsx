@@ -19,7 +19,10 @@ const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
 
   const toastHook = useToast();
   const { exchangeOptions, getFromAndTo, exchange } = useExchange();
-  const { form, setForm, onChange } = useForm({
+  const { form, setForm, onChange } = useForm<{
+    exchangeTo: string;
+    amount: number;
+  }>({
     form: {
       exchangeTo: '',
       amount: 0,
@@ -76,7 +79,9 @@ const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
         }`;
         return (
           <div>
-            <p>Do you want to exchange?</p>
+            <p className="text-[18px] font-bold mb-2">
+              Do you want to exchange?
+            </p>
             <Message severity="info" text={text} className="mt-2" />
           </div>
         );

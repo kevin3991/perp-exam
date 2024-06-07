@@ -6,10 +6,34 @@ import LogTable from '@/components/LogTable';
 import ReverseInfo from '@/components/ReserveInfo';
 import { useExchange } from '@/hooks/useExchange';
 import { Button } from 'primereact/button';
+import { confirmDialog } from 'primereact/confirmdialog';
 import { Skeleton } from 'primereact/skeleton';
 
 export default function Home(): JSX.Element {
   const { persistLoading, reset } = useExchange();
+
+  const onReset = (): void => {
+    confirmDialog({
+      message: () => {
+        return (
+          <div>
+            <p className="text-[18px] font-bold mb-2">Do you want to reset?</p>
+            <p>
+              System will remove all the history and reset the reserve to 10,000
+              TWD and 1,000 USD.
+            </p>
+          </div>
+        );
+      },
+      header: 'Reset Confirmation',
+      icon: 'pi pi-info-circle',
+      defaultFocus: 'reject',
+      acceptClassName: 'p-button-danger',
+      accept: () => {
+        reset();
+      },
+    });
+  };
 
   return (
     <>
@@ -27,7 +51,7 @@ export default function Home(): JSX.Element {
                   severity="danger"
                   label="Reset"
                   size="small"
-                  onClick={reset}
+                  onClick={onReset}
                 />
               </div>
               <ReverseInfo />

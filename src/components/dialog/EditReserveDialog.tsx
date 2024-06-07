@@ -77,7 +77,9 @@ const EditReserveDialog = (props: IEditReserveDialog): JSX.Element => {
       message: () => {
         return (
           <div>
-            <p>Are you sure you want to change the reserves?</p>
+            <p className="text-[18px] font-bold mb-2">
+              Are you sure you want to change the reserves?
+            </p>
             <p>System will remove all the history and reset.</p>
           </div>
         );
