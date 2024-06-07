@@ -5,6 +5,7 @@ import { useExchange } from '@/hooks/useExchange';
 import { type TCurrency } from '@/stores/reserve';
 import { Fieldset } from 'primereact/fieldset';
 import Info from './Info';
+import { useToast } from '@/hooks/useToast';
 
 interface IExchangeFormProps {
   className?: string;
@@ -13,6 +14,7 @@ interface IExchangeFormProps {
 const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
   const { className } = props;
 
+  const toastHook = useToast();
   const { exchangeOptions, getFromAndTo, exchange } = useExchange();
   const { form, setForm, onChange } = useForm({
     form: {
@@ -62,6 +64,7 @@ const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
   const onSubmit = async (): Promise<void> => {
     const [from, to] = getFromAndTo(form.exchangeTo as TCurrency);
     exchange(from, to, Number(form.amount));
+    toastHook.show('Exchange success!');
   };
   const handleMode = useCallback(() => {
     if (form.exchangeTo === '') {

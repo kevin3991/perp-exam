@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { PrimeReactProvider } from 'primereact/api';
+import ToastRoot from '@/components/ToastRoot';
 
 import './globals.css';
 import 'primereact/resources/themes/lara-light-cyan/theme.css';
@@ -22,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <PrimeReactProvider>{children}</PrimeReactProvider>
+        <PrimeReactProvider>
+          <ToastRoot />
+          {children}
+        </PrimeReactProvider>
       </body>
     </html>
   );
