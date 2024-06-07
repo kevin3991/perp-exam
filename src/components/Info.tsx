@@ -13,7 +13,7 @@ const Info = (props: IInfoProps): JSX.Element => {
   const iconRef = useRef<HTMLSpanElement>(null);
 
   return (
-    <span>
+    <span className="inline-flex items-center justify-center">
       <i
         ref={iconRef}
         className={`pi pi-info-circle ml-2 cursor-pointer text-[var(--primary-color)] ${uuid.current}`}

@@ -6,7 +6,7 @@ import CSelect from './CSelect';
 
 export interface TFormInput {
   name: string;
-  label?: string;
+  label?: string | (() => JSX.Element);
   placeholder?: string;
   required?: boolean;
   component?: 'Select' | 'Text' | 'Number';
@@ -141,6 +141,12 @@ export default function CForm(props: FormProps): JSX.Element {
     },
     [onSubmit, props.form]
   );
+  const getLabel = useCallback((input: TFormInput) => {
+    if (typeof input.label === 'function') {
+      return input.label();
+    }
+    return input.label ?? input.name;
+  }, []);
 
   return (
     <form className={formMainClassName} onSubmit={handleOnSubmit}>
@@ -155,7 +161,7 @@ export default function CForm(props: FormProps): JSX.Element {
                 {(input?.required ?? false) && (
                   <span className="mr-1 text-red-400">*</span>
                 )}
-                {input?.label ?? ''}
+                {getLabel(input)}
               </label>
               {getComponent(input, props.form)}
             </div>

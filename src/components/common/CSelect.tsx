@@ -18,6 +18,7 @@ export default function CSelect(props: ICSelectProps): JSX.Element {
         required={required}
         value={value}
         className="opacity-0 absolute left-0 bottom-0"
+        onChange={() => {}}
       />
       <Dropdown
         value={value}

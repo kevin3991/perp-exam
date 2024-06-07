@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useExchange } from '@/hooks/useExchange';
 import { type TCurrency } from '@/stores/reserve';
 import { Fieldset } from 'primereact/fieldset';
+import Info from './Info';
 
 interface IExchangeFormProps {
   className?: string;
@@ -16,7 +17,7 @@ const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
   const { form, setForm, onChange } = useForm({
     form: {
       exchangeTo: '',
-      amount: 1,
+      amount: 0,
     },
   });
 
@@ -26,7 +27,14 @@ const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
     return [
       {
         name: 'exchangeTo',
-        label: 'Exchange to',
+        label: () => {
+          return (
+            <span className="inline-flex items-center">
+              <span>Exchange to</span>
+              <Info>Select the currency you want to exchange to.</Info>
+            </span>
+          );
+        },
         colSpan: 6,
         component: 'Select',
         required: true,
@@ -34,7 +42,14 @@ const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
       },
       {
         name: 'amount',
-        label: 'Amount',
+        label: () => {
+          return (
+            <span className="inline-flex items-center">
+              <span>Amount</span>
+              <Info>Enter the amount you want to exchange.</Info>
+            </span>
+          );
+        },
         colSpan: 6,
         min: 1,
         component: 'Number',
@@ -49,7 +64,10 @@ const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
     exchange(from, to, Number(form.amount));
   };
   const handleMode = useCallback(() => {
-    if (form.exchangeTo === '') return;
+    if (form.exchangeTo === '') {
+      setCurrency(undefined);
+      return;
+    }
 
     const [from] = getFromAndTo(form.exchangeTo as TCurrency);
     setCurrency(from);
