@@ -8,9 +8,14 @@ import { useExchange } from '@/hooks/useExchange';
 import { Button } from 'primereact/button';
 import { confirmDialog } from 'primereact/confirmdialog';
 import { Skeleton } from 'primereact/skeleton';
+import { Tag } from 'primereact/tag';
+import { Tooltip } from 'primereact/tooltip';
+import { useRef } from 'react';
 
 export default function Home(): JSX.Element {
   const { persistLoading, reset } = useExchange();
+
+  const sourceRef = useRef<any>(null);
 
   const onReset = (): void => {
     confirmDialog({
@@ -53,6 +58,20 @@ export default function Home(): JSX.Element {
                   size="small"
                   onClick={onReset}
                 />
+              </div>
+              <div className="flex items-center">
+                <a
+                  href="https://medium.com/bollinger-investment-group/constant-function-market-makers-defis-zero-to-one-innovation-968f77022159"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="flex items-center transition-all duration-300 hover:opacity-70"
+                  ref={sourceRef}
+                >
+                  <Tag value="source" />
+                </a>
+                <Tooltip target={sourceRef}>
+                  (Rt + x) * (Ru + y) = Rt * Ru
+                </Tooltip>
               </div>
               <ReverseInfo />
               <ExchangeForm />
