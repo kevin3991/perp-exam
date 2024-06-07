@@ -10,7 +10,7 @@ This project implements an exchange module where users can exchange TWD (Taiwan 
 
 ## Usage
 
-### Environment Setup
+### Environment Setup (Node.js version >= v18.17.0)
 
 1. Clone the repository:
 
