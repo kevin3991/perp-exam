@@ -65,6 +65,10 @@ const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
     ];
   }, [exchangeOptions, currency]);
   const onSubmit = async (): Promise<void> => {
+    if (noPassValidation()) {
+      return;
+    }
+
     confirmDialog({
       message: () => {
         const text = `${formatNumberWithCommas(Number(form.amount))} ${
@@ -87,6 +91,17 @@ const ExchangeForm = (props: IExchangeFormProps): JSX.Element => {
         toastHook.show('Exchange success!');
       },
     });
+  };
+  const noPassValidation = (): boolean => {
+    if (form.exchangeTo === '') {
+      toastHook.warning('Please select a currency to exchange to.');
+      return true;
+    }
+    if (form.amount <= 0) {
+      toastHook.warning('The amount must bigger than 0.');
+      return true;
+    }
+    return false;
   };
   const handleMode = useCallback(() => {
     if (form.exchangeTo === '') {
