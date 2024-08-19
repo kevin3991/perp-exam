@@ -2,7 +2,7 @@ const Footer = (): JSX.Element => {
   return (
     <footer className="w-full bg-slate-200 fixed bottom-0 p-4 flex items-center justify-center">
       <p>
-        <span>&copy; 2024 Roy</span>
+        <span>&copy; 2024 Kevin3991</span>
         <a
           href="mailto:court.dream3@gmail.com"
           className="text-dark ml-2 hover:underline"
