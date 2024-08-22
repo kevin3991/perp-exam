@@ -16,7 +16,7 @@ Demo: https://cfmm.zeabur.app/
 1. Clone the repository:
 
    ```sh
-   git clone git@github.com:sather33/perp-exam.git
+   git clone git@github.com:kevin3991/perp-exam.git
    ```
 
 2. Navigate to the project directory:
