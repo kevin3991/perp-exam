@@ -16,13 +16,13 @@ Demo: https://cfmm.zeabur.app/
 1. Clone the repository:
 
    ```sh
-   git clone git@github.com:sather33/perp-exam-roy.git
+   git clone git@github.com:sather33/perp-exam.git
    ```
 
 2. Navigate to the project directory:
 
    ```sh
-   cd perp-exam-roy
+   cd perp-exam
    ```
 
 3. Install dependencies:
@@ -84,4 +84,4 @@ npm run test
 
 If you have any questions or need further assistance, please contact [court.dream3@gmail.com](mailto:court.dream3@gmail.com).
 
-I'm Roy. Nice to meet you. 🐝
+I'm Kevin. Nice to meet you. 🐝
